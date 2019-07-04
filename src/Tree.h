@@ -5,17 +5,13 @@
 
 #ifndef TREE_H_
 #define TREE_H_
+#include <vector>
 
-class Tree {
-private:
-	int age;
-	int posX;
-	int posY;
+#include "Eukaryote.h"
+
+class Tree : public Eukaryote{
 public:
-	Tree(int posX, int posY);
-	int getAge();
-	int getX();
-	int getY();
+	Tree(std::vector<int> position, int width);
 	virtual ~Tree();
 };
 
