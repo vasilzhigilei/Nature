@@ -1,30 +1,31 @@
 /*
  * Deer.h
  *
- *  Created on: Jun 6, 2019
- *      Author: vasil
  */
 
 #ifndef DEER_H_
 #define DEER_H_
+#include <vector>
 
-class Deer {
+#include "Eukaryote.h"
+
+class Deer : public Eukaryote {
 private:
-	int age;
 	int health;
-	int posX;
-	int posY;
+	std::vector<int> velocity;
+	std::vector<int> target;
 public:
-	Deer(int posX, int posY, int health);
-	int getAge();
+	Deer(std::vector<int> position, int health, int width);
 	int getHealth();
-	int getX();
-	int getY();
+	std::vector<int> getVelocity();
+	std::vector<int> getTarget();
 
-	void addAge(int change);
-	void addHealth(int change);
-	void addX(int change);
-	void addY(int change);
+	void changeHealth(int change);
+
+	void setVelocity(std::vector<int> newVelocity);
+	void move_velocity(); // Position changes in this method
+
+	void setTarget(std::vector<int> targetPosition);
 
 	virtual ~Deer();
 };

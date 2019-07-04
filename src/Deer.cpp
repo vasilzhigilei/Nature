@@ -1,49 +1,44 @@
 /*
  * Deer.cpp
  *
- *  Created on: Jun 6, 2019
- *      Author: vasil
  */
 
 #include "Deer.h"
+#include <algorithm>
+#include <functional>
 
-Deer::Deer(int posX, int posY, int health) {
-	age = 0;
+Deer::Deer(std::vector<int> position, int health, int width) : Eukaryote(position, width) {
+	this->velocity = {0,0};
 	this->health = health;
-	this->posX = posX;
-	this->posY = posY;
-}
-
-int Deer::getAge(){
-	return age;
+	this->target = position;
 }
 
 int Deer::getHealth(){
 	return health;
 }
 
-int Deer::getX(){
-	return posX;
+std::vector<int> Deer::getVelocity(){
+	return velocity;
 }
 
-int Deer::getY(){
-	return posY;
+std::vector<int> Deer::getTarget(){
+	return target;
 }
 
-void Deer::addAge(int change){
-	age += change;
-}
-
-void Deer::addHealth(int change){
+void Deer::changeHealth(int change){
 	health += change;
 }
 
-void Deer::addX(int change){
-	posX += change;
+void Deer::setVelocity(std::vector<int> newVelocity){
+	this->velocity = newVelocity;
 }
 
-void Deer::addY(int change){
-	posY += change;
+void Deer::move_velocity(){
+	std::transform(position.begin(), position.end(), velocity.begin(), position.begin(), std::plus<int>());
+}
+
+void Deer::setTarget(std::vector<int> targetPosition){
+	this->target = targetPosition;
 }
 
 Deer::~Deer() {

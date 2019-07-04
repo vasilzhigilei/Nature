@@ -1,8 +1,8 @@
 /*
  * LTimer.cpp
  *
- *  Created on: Jun 10, 2019
- *      Author: vasil
+ * Modified from LazyFoo SDL2 Tutorials
+ *
  */
 
 #include "LTimer.h"
@@ -10,7 +10,7 @@
 
 LTimer::LTimer()
 {
-    //Initialize the variables
+    // Initialize the variables
     mStartTicks = 0;
     mPausedTicks = 0;
 
@@ -20,39 +20,39 @@ LTimer::LTimer()
 
 void LTimer::start()
 {
-    //Start the timer
+    // Start the timer
     mStarted = true;
 
-    //Unpause the timer
+    // Unpause the timer
     mPaused = false;
 
-    //Get the current clock time
+    // Get the current clock time
     mStartTicks = SDL_GetTicks();
 	mPausedTicks = 0;
 }
 
 void LTimer::stop()
 {
-    //Stop the timer
+    // Stop the timer
     mStarted = false;
 
-    //Unpause the timer
+    // Unpause the timer
     mPaused = false;
 
-	//Clear tick variables
+	// Clear tick variables
 	mStartTicks = 0;
 	mPausedTicks = 0;
 }
 
 void LTimer::pause()
 {
-    //If the timer is running and isn't already paused
+    // If the timer is running and isn't already paused
     if( mStarted && !mPaused )
     {
-        //Pause the timer
+        // Pause the timer
         mPaused = true;
 
-        //Calculate the paused ticks
+        // Calculate the paused ticks
         mPausedTicks = SDL_GetTicks() - mStartTicks;
 		mStartTicks = 0;
     }
@@ -60,13 +60,13 @@ void LTimer::pause()
 
 void LTimer::unpause()
 {
-    //If the timer is running and paused
+    // If the timer is running and paused
     if( mStarted && mPaused )
     {
-        //Unpause the timer
+        // Unpause the timer
         mPaused = false;
 
-        //Reset the starting ticks
+        // Reset the starting ticks
         mStartTicks = SDL_GetTicks() - mPausedTicks;
 
         //Reset the paused ticks
@@ -76,21 +76,21 @@ void LTimer::unpause()
 
 uint32_t LTimer::getTicks()
 {
-	//The actual timer time
+	// The actual timer time
 	uint32_t time = 0;
 
-    //If the timer is running
+    // If the timer is running
     if( mStarted )
     {
-        //If the timer is paused
+        // If the timer is paused
         if( mPaused )
         {
-            //Return the number of ticks when the timer was paused
+            // Return the number of ticks when the timer was paused
             time = mPausedTicks;
         }
         else
         {
-            //Return the current time minus the start time
+            // Return the current time minus the start time
             time = SDL_GetTicks() - mStartTicks;
         }
     }
@@ -100,12 +100,12 @@ uint32_t LTimer::getTicks()
 
 bool LTimer::isStarted()
 {
-	//Timer is running and paused or unpaused
+	// Timer is running and paused or unpaused
     return mStarted;
 }
 
 bool LTimer::isPaused()
 {
-	//Timer is running and paused
+	// Timer is running and paused
     return mPaused && mStarted;
 }
